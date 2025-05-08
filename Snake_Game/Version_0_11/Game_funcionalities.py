@@ -1,11 +1,9 @@
 import time
-
 import pygame
-from pygame.rect import RectType
-
 from Configuration import Configuration
 from Snake import SnakeBlock
 from Apple import Apple
+from Media import Background, Audio
 
 def game_events()->bool:
     """
@@ -73,7 +71,7 @@ def snake_movement(snake_body: pygame.sprite.Group)->None:
     elif SnakeBlock.get_is_moving_down():
         head.rect.y += Configuration.get_snake_block_size()
 
-def check_collision(screen: pygame.surface.Surface, snake_body: pygame.sprite.Group, apples: pygame.sprite.Group)->bool:
+def check_collision(screen: pygame.surface.Surface, snake_body: pygame.sprite.Group, apples: pygame.sprite.Group, audio: Audio)->bool:
     """
     Funcion que revisa las coliciones del juego
     * Cabeza de la serpiente con el cuerpo
@@ -121,21 +119,37 @@ def check_collision(screen: pygame.surface.Surface, snake_body: pygame.sprite.Gr
         new_apple.random_position(snake_body)
         apples.add(new_apple)
 
+        #Se reproduce el sonido de que la serpiente ha comido la manzana
+        audio.play_eats_apple_sound()
+
     return game_over
 
-def screen_refresh(screen: pygame.surface.Surface, clock: pygame.time.Clock, snake_body: pygame.sprite.Group, apples: pygame.sprite.Group)->None:
+def screen_refresh(screen: pygame.surface.Surface, clock: pygame.time.Clock, snake_body: pygame.sprite.Group,
+                   apples: pygame.sprite.Group, background: Background)->None:
     """
     Función que adminisrra los elementos visuales del juego.
     """
+
+    #Se dibuja el fondo de la pantalla
+    background.blit(screen)
+
+
+
     #Fondo de la pantalla en formato RGB
-    screen.fill(Configuration.getter_background())
+    #screen.fill(Configuration.getter_background())
+
+    snake_body.sprites()[0].animate_head()
+
+    # Se dibuja el cuerpo de la serpiente.
+    for snake_block in reversed(snake_body.sprites()):
+        snake_block.blit(screen)
+
+    #Se anima el movimiento de la manzana
+    apples.sprites()[0].animate_apple()
 
     # Se dibuja la manzana
     apples.draw(screen)
 
-    #Se dibuja el cuerpo de la serpiente.
-    for snake_block in reversed(snake_body.sprites()):
-        snake_block.blit(screen)
 
     # Se actualiza la pantalla.
     pygame.display.flip()
@@ -143,8 +157,12 @@ def screen_refresh(screen: pygame.surface.Surface, clock: pygame.time.Clock, sna
     #Se controla le velocidad de fps del juego
     clock.tick(Configuration.getter_fps())
 
-def game_over_screen()->None:
+def game_over_screen(audio: Audio)->None:
     """
     Función con la parte del fin del juego
     """
+    #Se realiza el desvanecimiento de la musica y se reproduce el sonido de fin de juego
+    audio.music_fadeout(time=Configuration.get_music_fadeout_time())
+    audio.play_game_over_sound()
+
     time.sleep(Configuration.gette_game_over_screen_time())

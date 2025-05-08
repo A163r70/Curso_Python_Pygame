@@ -11,6 +11,8 @@ from Game_funcionalities import game_events, screen_refresh, snake_movement, che
 from Snake import SnakeBlock
 from pygame.sprite import Group
 from Apple import Apple
+from Media import Background
+
 
 
 def run_game()->None:
@@ -46,6 +48,11 @@ def run_game()->None:
     apples = Group()
     apples.add(apple)
 
+    #Se crea el objeto con el fondo de pantalla
+    background = Background()
+
+    #Se crea el objeto para dibujar la manzana
+
 
     #Ciclo principal del videojuego
     game_over = False
@@ -64,7 +71,7 @@ def run_game()->None:
         game_over = check_collision(screen, snake_body, apples)
 
         # Se dibujan los elementos gráficos en la pantalla.
-        screen_refresh(screen, clock, snake_body, apples)
+        screen_refresh(screen, clock, snake_body, apples, background)
 
         # Si a perdido el jugador se llama a la pantalla de fin del juego
         if game_over:

@@ -9,6 +9,7 @@ class Configuration:
     _fps = 8 #fps del juego.
     _game_over_screen_time = 2
 
+
     #Configuraciones de la serpiente
     _snake_block_size = 80 #Tamaño del bloque de la serpiente.
     _snake_head_color = (255, 255, 255) #Color de la cabeza
@@ -18,6 +19,14 @@ class Configuration:
     # Configuraciones de la manzana.
     _apple_block_size = _snake_block_size  # Tamaño del bloque (igual que la el de la serpiente).
     _apple_color = (255, 0, 0)  # Color de la manzana.
+
+    #La rutas de los archivos multimedia
+    _background_image_path = "../Media/background_image.jpg"
+    _apple_image_path = "../Media/apple1.png"
+    _snake_head_image_path = "../Media/head1.png"
+    _snake_body_image_path =  ["../Media/body1.png",
+                                "../Media/body2.png",
+                                "../Media/body3.png"]
 
     @classmethod
     def get_screen_size(cls)->tuple[int, int]:
@@ -33,12 +42,10 @@ class Configuration:
         """
         return cls._game_title
 
-    @classmethod
+    """@classmethod
     def getter_background(cls)->tuple[int, int, int]:
-        """
-        Getter para _background.
-        """
-        return cls._background
+        
+        return cls._background"""
 
     @classmethod
     def getter_fps(cls) -> int:
@@ -87,3 +94,31 @@ class Configuration:
         Getter para _snake_body_color.
         """
         return cls._apple_color
+
+    @classmethod
+    def get_background_image_path(cls) ->str:
+        """
+        Getter para _background_image_path
+        """
+        return cls._background_image_path
+
+    @classmethod
+    def get_apple_image_path(cls) -> str:
+        """
+        Getter para _background_apple_path
+        """
+        return cls._apple_image_path
+
+    @classmethod
+    def get_snake_head_image_path(cls) -> str:
+        """
+        Getter para _background_apple_path
+        """
+        return cls._snake_head_image_path
+
+    @classmethod
+    def get_snake_body_image_path(cls) -> list:
+        """
+        Getter para _background_apple_path
+        """
+        return cls._snake_body_image_path

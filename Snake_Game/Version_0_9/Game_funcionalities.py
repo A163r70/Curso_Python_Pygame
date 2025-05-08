@@ -1,11 +1,10 @@
 import time
-
 import pygame
-from pygame.rect import RectType
-
 from Configuration import Configuration
 from Snake import SnakeBlock
 from Apple import Apple
+from Media import Background
+
 
 def game_events()->bool:
     """
@@ -123,12 +122,19 @@ def check_collision(screen: pygame.surface.Surface, snake_body: pygame.sprite.Gr
 
     return game_over
 
-def screen_refresh(screen: pygame.surface.Surface, clock: pygame.time.Clock, snake_body: pygame.sprite.Group, apples: pygame.sprite.Group)->None:
+def screen_refresh(screen: pygame.surface.Surface, clock: pygame.time.Clock, snake_body: pygame.sprite.Group,
+                   apples: pygame.sprite.Group, background: Background)->None:
     """
     Función que adminisrra los elementos visuales del juego.
     """
+
+    #Se dibuja el fondo de la pantalla
+    background.blit(screen)
+
+
+
     #Fondo de la pantalla en formato RGB
-    screen.fill(Configuration.getter_background())
+    #screen.fill(Configuration.getter_background())
 
     # Se dibuja la manzana
     apples.draw(screen)
