@@ -105,5 +105,5 @@ class GameOverImage:
         """
         self.rect.centerx = screen.get_rect().centerx
         self.rect.bottom = screen.get_rect().bottom-Configuration.get_snake_block_size()
-        self.blit(self.image, self.rect)
+        screen.blit(self.image, self.rect)
 

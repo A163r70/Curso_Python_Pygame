@@ -1,7 +1,5 @@
 import time
 import pygame
-from pygame.examples.go_over_there import screen
-
 from Configuration import Configuration
 from Snake import SnakeBlock
 from Apple import Apple
@@ -164,7 +162,7 @@ def screen_refresh(screen: pygame.surface.Surface, clock: pygame.time.Clock, sna
     # Se actualiza la pantalla.
     pygame.display.flip()
 
-def game_over_screen(audio: Audio)->None:
+def game_over_screen(audio: Audio, screen: pygame.surface.Surface)->None:
     """
     Función con la parte del fin del juego
     """
