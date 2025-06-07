@@ -6,16 +6,18 @@ class Configuration:
     _screen_size = (1000, 500)           #Resolución de la pantalla (ancho, alto)
     _game_title = "Soldiers vs Alien" #Título del juego.
     _background = (20, 30, 50)           # Fondo de la pantalla en formato RGB.
-    _fps = 20  # fps del juego.
+    _fps = 60  # fps del juego.
 
     # Configuraciones del soldado.
     _soldier_size = (142, 76)
     _soldier_frames_per_row = 4  # Número de frames que contiene cada fila de la hoja de frames.
+    _soldier_frames_per_column = 2
+    _soldier_shooting_frame_delay = 30
     _soldier_frame_delay = 300  # Tiempo de cada frame del personaje (en ms).
     _soldier_speed = 12.5  # Velocidad (en píxeles) del personaje.
 
     _background_image_path = "../Media/game.jpg"
-    _soldier_sheet_path = "../Media/soldier-idle-sheet.png"
+    _soldier_sheet_path = "../Media/soldier-idle_shooting_sheet.png"
 
     _shot_sheet_path = "../Media/shot-sheet.png"
     _shot_frames_per_row = 4
@@ -76,7 +78,16 @@ class Configuration:
         """
         return cls._soldier_frames_per_row
 
-    """NUEVO."""
+    @classmethod
+    def get_soldier_frames_per_column(cls)->int:
+        return cls._soldier_frames_per_column
+
+    @classmethod
+    def get_soldier_shooting_frame_delay(cls) -> int:
+        """
+        Getter para _soldier_shooting_frame_delay.
+        """
+        return cls._soldier_shooting_frame_delay
 
     @classmethod
     def get_soldier_frame_delay(cls) -> int:

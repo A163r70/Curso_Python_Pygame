@@ -28,6 +28,7 @@ def game_events(soldier: Soldier, shots: pygame.sprite.Group)->bool:
             if event.key == pygame.K_SPACE:
                 new_shot = Shot(soldier)
                 shots.add(new_shot)
+                soldier.shoots()
 
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_UP:
